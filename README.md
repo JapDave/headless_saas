@@ -328,3 +328,7 @@ The default settings run tests against PostgreSQL. A GitHub Actions template is 
 - **Team membership**: add `TeamMembership(user, team, role_in_team)`.  
 - **Account Admin**: a role that manages multiple orgs under the same account but not system-wide.  
 - **Policy engine**: consume `role.permissions` strings for fine-grained checks.
+
+## Maintainer
+
+[Jap Dave](https://github.com/JapDave) · Python Backend Developer · [Contact](mailto:japdavev@gmail.com)
