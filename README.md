@@ -293,7 +293,7 @@ docker compose exec web pytest -q
 pytest --ds=config.test_settings -q
 ```
 
-CI runs the same API tests against PostgreSQL. This is a backend reference project; production deployment still requires environment-specific security and operational review.
+The default settings run tests against PostgreSQL. A GitHub Actions template is available in `docs/ci/tests.yml`; copy it to `.github/workflows/tests.yml` to enable CI. This is a backend reference project; production deployment still requires environment-specific security and operational review.
 
 ### What’s covered
 - Auth smoke (obtain token and hit a protected endpoint)
