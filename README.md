@@ -1,6 +1,6 @@
 # Headless SaaS API (Django REST + Docker)
 
-Production-ready Django REST stack implementing **Accounts → Organizations → Users → Teams** with **Roles (RBAC)** and **Subscriptions**, JWT auth, soft-delete, pagination & filtering, and auto OpenAPI docs (Swagger & Redoc).
+Django REST reference implementation implementing **Accounts → Organizations → Users → Teams** with **Roles (RBAC)** and **Subscriptions**, JWT auth, soft-delete, pagination & filtering, and auto OpenAPI docs (Swagger & Redoc).
 
 > API fields follow the spec’s **camelCase** (e.g., `accountId`, `createdAt`), while Django models remain Pythonic (`snake_case`). Serializers map between them so the external contract stays exactly as required.
 
@@ -288,10 +288,12 @@ All payloads/responses use **camelCase** field names matching the requirement do
 docker compose exec web pytest -q
 ```
 
-### Local
+### Local (isolated SQLite database)
 ```bash
-pytest -q
+pytest --ds=config.test_settings -q
 ```
+
+CI runs the same API tests against PostgreSQL. This is a backend reference project; production deployment still requires environment-specific security and operational review.
 
 ### What’s covered
 - Auth smoke (obtain token and hit a protected endpoint)

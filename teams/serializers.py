@@ -1,8 +1,9 @@
+from core.serializers import OrganizationScopeMixin
 from rest_framework import serializers
 from accounts.models import Organization
 from .models import Team
 
-class TeamSerializer(serializers.ModelSerializer):
+class TeamSerializer(OrganizationScopeMixin, serializers.ModelSerializer):
     teamId         = serializers.IntegerField(source="id", read_only=True)
     organizationId = serializers.PrimaryKeyRelatedField(source="organization", queryset=Organization.objects.all())
     configurations = serializers.JSONField(required=False)

@@ -1,9 +1,10 @@
+from core.serializers import OrganizationScopeMixin
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from accounts.models import Organization
 from .models import User
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(OrganizationScopeMixin, serializers.ModelSerializer):
     userId         = serializers.IntegerField(source="id", read_only=True)
     organizationId = serializers.PrimaryKeyRelatedField(source="organization", queryset=Organization.objects.all(), allow_null=True, required=False)
     fullName       = serializers.CharField(source="full_name", required=False, allow_blank=True)
@@ -42,7 +43,7 @@ class UserSerializer(serializers.ModelSerializer):
             validate_password(password, user=user)
             user.set_password(password)
         else:
-            user.set_password(User.objects.make_random_password())
+            user.set_unusable_password()
         user.save()
         return user
 

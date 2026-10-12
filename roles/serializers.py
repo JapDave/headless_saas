@@ -1,8 +1,9 @@
+from core.serializers import OrganizationScopeMixin
 from rest_framework import serializers
 from accounts.models import Organization
 from .models import Role
 
-class RoleSerializer(serializers.ModelSerializer):
+class RoleSerializer(OrganizationScopeMixin, serializers.ModelSerializer):
     roleId        = serializers.IntegerField(source="id", read_only=True)
     organizationId = serializers.PrimaryKeyRelatedField(source="organization", queryset=Organization.objects.all(), allow_null=True, required=False)
     isCustom      = serializers.BooleanField(source="is_custom", required=False)
